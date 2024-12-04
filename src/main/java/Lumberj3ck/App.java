@@ -2,8 +2,7 @@ package Lumberj3ck;
 
 import java.time.LocalDate;
 
-
-public class App{
+public class App {
     public static void main(String[] args) {
         MarketDataProvider provider = new MarketDataProvider();
         provider.getDataFromMarket("AAPL");
