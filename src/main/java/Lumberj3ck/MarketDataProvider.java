@@ -1,10 +1,10 @@
 package Lumberj3ck;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-import java.time.LocalDate;
 
 import io.github.cdimascio.dotenv.Dotenv;
 import okhttp3.OkHttpClient;
@@ -21,6 +21,7 @@ public class MarketDataProvider {
 
         this.api_key = dotenv.get("api_key");
         this.api_secret_key = dotenv.get("api_secret_key");
+        // check if they exist
 
         this.client = new OkHttpClient();
     }
@@ -50,7 +51,7 @@ public class MarketDataProvider {
         }
     }
 
-    public void getClosingPrices(LocalDate start, String timeframe) {
+    public ArrayList<Integer> getClosingPrices(LocalDate start, String timeframe) {
         String requestUrl = String.format(
                 "https://data.alpaca.markets/v2/stocks/bars?symbols=AAPL&timeframe=%s&start=%s&limit=1000&adjustment=raw&feed=sip&sort=asc",
                 timeframe, start);
@@ -69,10 +70,11 @@ public class MarketDataProvider {
 
             System.out.println(Jobject.optString("next_page_toke"));
             // symbol hardcoded for now
-            System.out.println(buildData(Jobject, "AAPL"));
+            return buildData(Jobject, "AAPL");
         } catch (Exception e) {
             System.out.println(e);
         }
+        return new ArrayList<>();
     }
 
     public ArrayList<Integer> buildData(JSONObject jsonData, String symbol){
@@ -86,12 +88,12 @@ public class MarketDataProvider {
         return finalPrices;
     }
 
-    public static double calculateSMA(int[] closingPrices){
+    public static double calculateSMA(ArrayList<Integer> closingPrices){
         int priceSum = 0;
         for (int cp : closingPrices){
             priceSum += cp;
         }
-        return priceSum / closingPrices.length;
+        return priceSum / closingPrices.size();
     }
 
     public void closeClient() {
@@ -100,3 +102,4 @@ public class MarketDataProvider {
 
     }
 }
+
