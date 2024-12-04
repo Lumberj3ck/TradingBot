@@ -1,16 +1,12 @@
 package Lumberj3ck;
 
-public class Strategy {
-   
-    Strategy(){
+abstract public class Strategy {
 
-    } 
+    abstract public void buy();
 
-    public void buy(){
-
-    }
-
-    public void sell(){
-
-    }
+    abstract public void sell();
+    
+    abstract public boolean shouldEnter();
+    
+    abstract public boolean shouldExit();
 }

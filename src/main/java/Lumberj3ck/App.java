@@ -7,8 +7,10 @@ public class App{
     public static void main(String[] args) {
         MarketDataProvider provider = new MarketDataProvider();
         provider.getDataFromMarket("AAPL");
-        LocalDate startingDate = LocalDate.of(2024, 10, 1);
-        provider.getClosingPrices(startingDate, "1D");
+        LocalDate startingDate = LocalDate.of(2024, 12, 1);
+        provider.getClosingPrices(startingDate, "1H");
+//        provider.getSMA(); WRITE FUNCTION
         provider.closeClient();
     }
 }
+ 

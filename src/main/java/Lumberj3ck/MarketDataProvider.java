@@ -75,13 +75,13 @@ public class MarketDataProvider {
         }
     }
 
-    public ArrayList<Integer> buildData(JSONObject jsonData, String symbol){
+    public ArrayList<Double> buildData(JSONObject jsonData, String symbol){
         JSONObject bars = jsonData.getJSONObject("bars");
         JSONArray prices = bars.getJSONArray(symbol);
-        ArrayList<Integer> finalPrices = new ArrayList<>();
+        ArrayList<Double> finalPrices = new ArrayList<>();
         for (Object priceObj : prices) {
             JSONObject price = (JSONObject) priceObj;
-            finalPrices.add(price.getInt("c"));
+            finalPrices.add(price.getDouble("c"));
         }
         return finalPrices;
     }
