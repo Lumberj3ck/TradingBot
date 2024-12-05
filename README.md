@@ -15,3 +15,6 @@ TODO:
 
 
 Purpose of TradeExecutor to add one more abstraction and at some point make test Executor which will extend TradeExecutor
+
+Discuss if we should decouple TradingExecutor from Abstract Strategy.
+Because Strategy is supposed to be only responsible for entering market or exiting market, everything else is done by TradingExecutor
