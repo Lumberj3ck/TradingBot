@@ -19,6 +19,7 @@ public class Runner {
                     strategy.sell(symbol);
                 }
             }
+
             //  for now just sleep for hour
             int second = 1000;
             int hour = second * 3600;
