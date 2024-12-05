@@ -17,15 +17,4 @@ public class SmaStrategy extends Strategy {
         // TODO Auto-generated method stub
         return true;
     }
-
-    @Override
-    public void buy(String symbol, int amount){
-        this.executor.buy(symbol, amount);
-    }
-
-    
-    @Override
-    public void sell(String symbol){
-        this.executor.sell(symbol);
-    };
 }

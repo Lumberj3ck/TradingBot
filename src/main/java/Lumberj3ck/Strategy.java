@@ -8,12 +8,15 @@ abstract public class Strategy {
     }
 
     public void buy(String symbol, int amount){
-        // buying logic
+        // selling logic 
+        // just calling executor
+        this.executor.buy(symbol, amount);
     }
 
     public void sell(String symbol){
         // selling logic 
         // just calling executor
+        this.executor.sell(symbol);
     };
 
 
