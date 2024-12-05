@@ -1,6 +1,11 @@
 package Lumberj3ck;
 
 abstract public class Strategy {
+    protected TradeExecutor executor;
+
+    public Strategy(TradeExecutor executor) {
+        this.executor = executor;
+    }
 
     public void buy(String symbol, int amount){
         // buying logic
@@ -8,6 +13,7 @@ abstract public class Strategy {
 
     public void sell(String symbol){
         // selling logic 
+        // just calling executor
     };
 
 
