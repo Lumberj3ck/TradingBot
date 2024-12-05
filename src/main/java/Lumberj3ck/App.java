@@ -1,10 +1,12 @@
 package Lumberj3ck;
 
+import net.jacobpeterson.alpaca.openapi.trader.ApiException;
+
 // import java.time.LocalDate;
 // import java.util.ArrayList;
 
 public class App {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ApiException, InterruptedException {
         // MarketDataProvider provider = new MarketDataProvider();
 
         // provider.getDataFromMarket("AAPL");
