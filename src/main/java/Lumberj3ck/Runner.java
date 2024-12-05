@@ -10,7 +10,6 @@ public class Runner {
 
         while (true){
             for (String symbol : symbols){
-                strategy.shouldEnterMarket(symbol);
                 if (!strategy.isPositionOpen(symbol) && strategy.shouldEnterMarket(symbol)){
                     // for now hardcoded
                     int amount = 5;
@@ -24,7 +23,7 @@ public class Runner {
             int second = 1000;
             int hour = second * 3600;
             try {
-                Thread.sleep(hour);
+                Thread.sleep(second);
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
             }
