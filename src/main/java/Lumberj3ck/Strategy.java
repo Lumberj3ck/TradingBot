@@ -2,11 +2,21 @@ package Lumberj3ck;
 
 abstract public class Strategy {
 
-    abstract public void buy();
+    public void buy(String symbol, int amount){
+        // buying logic
+    }
 
-    abstract public void sell();
+    public void sell(String symbol){
+        // selling logic 
+    };
 
-    abstract public boolean shouldEnterMarket();
 
-    abstract public boolean shouldExitMarket();
+    public boolean isPositionOpen(String symbol){
+        // checking logic
+        return false;
+    }
+
+    abstract public boolean shouldEnterMarket(String symbol);
+
+    abstract public boolean shouldExitMarket(String symbol);
 }
