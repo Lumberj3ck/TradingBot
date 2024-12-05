@@ -13,7 +13,7 @@ public class App {
         // // provider.calculateSMA(cp);
         // provider.closeClient();
         TradeExecutor t = new TestExecutor();
-        Strategy s = new SmaStrategy(t);
+        Strategy s = new TestStrategy(t);
 
         Runner.run(s);
     }
