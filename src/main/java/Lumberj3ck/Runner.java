@@ -3,12 +3,10 @@ package Lumberj3ck;
 // import java.util.ArrayList;
 // import java.util.Arrays;
 
-import net.jacobpeterson.alpaca.openapi.trader.ApiException;
 
 public class Runner {
 
-    public static void run(TestStrategy strategy, TestExecutor executor)
-            throws ApiException, InterruptedException {
+    public static void run(Strategy strategy, TradeExecutor executor){
         // ArrayList<String> symbols = new ArrayList<>(Arrays.asList("AAPL", "GOOGL",
         // "MSFT"));
         String symbol = "AAPL";
@@ -27,7 +25,7 @@ public class Runner {
             String amount = "1";
             if (!strategy.isPositionOpen(symbol) && strategy.shouldEnterMarket(symbol)) {
                 executor.buy(symbol, amount);
-            } else if (strategy.isPositionOpen(symbol) && strategy.shouldEnterMarket(symbol)) {
+            } else if (strategy.isPositionOpen(symbol) && strategy.shouldExitMarket(symbol)) {
                 executor.sell(symbol, amount);
             }
 

@@ -1,12 +1,8 @@
 package Lumberj3ck;
-
-import net.jacobpeterson.alpaca.openapi.trader.ApiException;
-
-// import java.time.LocalDate;
 // import java.util.ArrayList;
 
 public class App {
-    public static void main(String[] args) throws ApiException, InterruptedException {
+    public static void main(String[] args){
         // MarketDataProvider provider = new MarketDataProvider();
 
         // provider.getDataFromMarket("AAPL");
@@ -15,7 +11,7 @@ public class App {
         // // provider.calculateSMA(cp);
         // provider.closeClient();
         TestExecutor t = new TestExecutor();
-        TestStrategy s = new TestStrategy(t);
+        TestStrategy s = new TestStrategy();
 
         Runner.run(s, t);
     }
