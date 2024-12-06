@@ -1,5 +1,7 @@
 package Lumberj3ck;
 
+import net.jacobpeterson.alpaca.openapi.trader.ApiException;
+
 abstract public class Strategy {
     protected TradeExecutor executor;
 
@@ -7,20 +9,19 @@ abstract public class Strategy {
         this.executor = executor;
     }
 
-    public void buy(String symbol, int amount){
-        // selling logic 
+    public void buy(String symbol, String amount) throws ApiException, InterruptedException {
+        // selling logic
         // just calling executor
         this.executor.buy(symbol, amount);
     }
 
-    public void sell(String symbol){
-        // selling logic 
+    public void sell(String symbol, String amount) {
+        // selling logic
         // just calling executor
-        this.executor.sell(symbol);
+        this.executor.sell(symbol, amount);
     };
 
-
-    public boolean isPositionOpen(String symbol){
+    public boolean isPositionOpen(String symbol) {
         // checking logic
         return false;
     }
