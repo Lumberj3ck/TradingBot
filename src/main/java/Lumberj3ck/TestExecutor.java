@@ -1,6 +1,6 @@
 package Lumberj3ck;
 
-public class TestExecutor extends TradeExecutor {
+public class TestExecutor extends AlpacaPaperExecutor {
     @Override
     public void buy(String symbol, String amount) {
         super.buy(symbol, amount);

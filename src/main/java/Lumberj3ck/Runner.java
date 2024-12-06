@@ -7,7 +7,8 @@ import net.jacobpeterson.alpaca.openapi.trader.ApiException;
 
 public class Runner {
 
-    public static void run(Strategy strategy) throws ApiException, InterruptedException {
+    public static void run(TestStrategy strategy, TestExecutor executor)
+            throws ApiException, InterruptedException {
         // ArrayList<String> symbols = new ArrayList<>(Arrays.asList("AAPL", "GOOGL",
         // "MSFT"));
         String symbol = "AAPL";
@@ -25,16 +26,16 @@ public class Runner {
             // }
             String amount = "1";
             if (!strategy.isPositionOpen(symbol) && strategy.shouldEnterMarket(symbol)) {
-                strategy.buy(symbol, amount);
+                executor.buy(symbol, amount);
             } else if (strategy.isPositionOpen(symbol) && strategy.shouldEnterMarket(symbol)) {
-                strategy.sell(symbol, amount);
+                executor.sell(symbol, amount);
             }
 
             // for now just sleep for hour
             int second = 1000;
             int hour = second * 3600;
             try {
-                Thread.sleep(second);
+                Thread.sleep(second * 5);
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
             }

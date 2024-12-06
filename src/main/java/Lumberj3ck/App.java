@@ -14,9 +14,9 @@ public class App {
         // ArrayList<Integer> cp = provider.getClosingPrices(startingDate, "1D");
         // // provider.calculateSMA(cp);
         // provider.closeClient();
-        TradeExecutor t = new TestExecutor();
-        Strategy s = new TestStrategy(t);
+        TestExecutor t = new TestExecutor();
+        TestStrategy s = new TestStrategy(t);
 
-        Runner.run(s);
+        Runner.run(s, t);
     }
 }
