@@ -8,10 +8,6 @@ public class TestStrategy extends Strategy {
 
     private Map<String, Boolean> openPositions = new HashMap<>();
 
-    TestStrategy(TradeExecutor executor) {
-        super(executor);
-    }
-
     @Override
     public boolean shouldEnterMarket(String symbol) {
         openPositions.put(symbol, true);
