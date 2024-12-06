@@ -11,9 +11,9 @@ import okhttp3.Response;
 
 abstract class AlpacaPaperExecutor extends TradeExecutor {
 
-    private String api_key;
-    private String api_secret_key;
-    private String url;
+    private final String api_key;
+    private final String api_secret_key;
+    private final String url;
 
     AlpacaPaperExecutor() {
         Dotenv de = Dotenv.load();

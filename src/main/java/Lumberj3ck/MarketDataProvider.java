@@ -12,9 +12,9 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 public class MarketDataProvider {
-    private OkHttpClient client;
-    private String api_key;
-    private String api_secret_key;
+    private final OkHttpClient client;
+    private final String api_key;
+    private final String api_secret_key;
 
     MarketDataProvider() {
         Dotenv dotenv = Dotenv.load();
