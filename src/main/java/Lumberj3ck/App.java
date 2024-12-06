@@ -10,9 +10,13 @@ public class App {
         // ArrayList<Integer> cp = provider.getClosingPrices(startingDate, "1D");
         // // provider.calculateSMA(cp);
         // provider.closeClient();
-        TestExecutor t = new TestExecutor();
-        TestStrategy s = new TestStrategy();
 
-        Runner.run(s, t);
+        // TestExecutor t = new TestExecutor();
+        // TestStrategy s = new TestStrategy();
+
+        // Runner.run(s, t);
+
+        Strategy s = new SmaStrategy();
+        s.isPositionOpen("NVDA");
     }
 }
