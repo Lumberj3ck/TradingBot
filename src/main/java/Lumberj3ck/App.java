@@ -1,8 +1,6 @@
 package Lumberj3ck;
 // import java.util.ArrayList;
 
-import java.io.IOException;
-
 public class App {
     public static void main(String[] args) {
         // MarketDataProvider provider = new MarketDataProvider();
@@ -22,14 +20,8 @@ public class App {
         // s.isPositionOpen("NVDA");
 
         UserDataProvider us = new UserDataProvider();
-        AlpacaPaperExecutor alp = new AlpacaPaperExecutor();
-        alp.buy("AAPL", "1");
+        us.getBalance();
+        // us.getBalance();
 
-        try {
-            us.getBalance();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
     }
 }

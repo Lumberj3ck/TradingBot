@@ -1,12 +1,8 @@
 package Lumberj3ck;
 
-abstract class TradeExecutor extends UserDataProvider {
+abstract class TradeExecutor {
 
-    // public TradeExecutor() {
-
-    // }
-
-    // protected abstract boolean isEnoughFunds();
+    protected abstract boolean isEnoughFunds(Double stockPrice);
 
     abstract public void buy(String symbol, String amount);
 
