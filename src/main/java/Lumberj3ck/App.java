@@ -22,6 +22,9 @@ public class App {
         // s.isPositionOpen("NVDA");
 
         UserDataProvider us = new UserDataProvider();
+        AlpacaPaperExecutor alp = new AlpacaPaperExecutor();
+        alp.buy("AAPL", "1");
+
         try {
             us.getBalance();
         } catch (IOException e) {
