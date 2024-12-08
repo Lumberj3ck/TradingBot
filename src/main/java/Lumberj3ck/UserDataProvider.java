@@ -1,46 +1,30 @@
 package Lumberj3ck;
 
 import java.io.IOException;
-import java.util.HashMap;
 
 import org.json.JSONObject;
 
-import io.github.cdimascio.dotenv.Dotenv;
-import okhttp3.MediaType;
-
-import okhttp3.OkHttpClient;
 import okhttp3.Request;
-import okhttp3.RequestBody;
 import okhttp3.Response;
-import okhttp3.ResponseBody;
 
 public class UserDataProvider {
-
-    private final String api_key;
-    private final String api_secret_key;
+    private AlpacaKeysManager manager;
     private final String url;
 
     UserDataProvider() {
-        Dotenv de = Dotenv.load();
+        this.manager = new AlpacaKeysManager();
 
-        this.api_key = de.get("api_key");
-        this.api_secret_key = de.get("api_secret_key");
         this.url = "https://paper-api.alpaca.markets/v2/account";
     }
 
     private JSONObject getUserInfo() {
-        OkHttpClient client = new OkHttpClient();
-
         Request request = new Request.Builder()
                 .url(url)
                 .get()
-                .addHeader("APCA-API-KEY-ID", api_key)
-                .addHeader("APCA-API-SECRET-KEY", api_secret_key)
-                .addHeader("accept", "application/json")
                 .build();
 
         try {
-            Response response = client.newCall(request).execute();
+            Response response = this.manager.client.newCall(request).execute();
             if (response.isSuccessful() && response.body() != null) {
                 // Line below prints out whole information about the user like a BIG ASS line
                 // System.out.println(response.body().string());

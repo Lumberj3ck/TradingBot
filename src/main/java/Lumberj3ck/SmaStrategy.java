@@ -2,23 +2,14 @@ package Lumberj3ck;
 
 import org.json.JSONObject;
 
-import io.github.cdimascio.dotenv.Dotenv;
-import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
 public class SmaStrategy extends Strategy{
-    private final String api_key;
-    private final String api_secret_key;
-    private OkHttpClient client;
+    private AlpacaKeysManager manager;
 
     SmaStrategy(){
-        this.client = new OkHttpClient();
-
-        Dotenv de = Dotenv.load();
-
-        this.api_key = de.get("api_key");
-        this.api_secret_key = de.get("api_secret_key");
+        this.manager = new AlpacaKeysManager();
     }
 
     @Override
@@ -38,13 +29,10 @@ public class SmaStrategy extends Strategy{
         Request request = new Request.Builder()
         .url(request_url)
         .get()
-        .addHeader("accept", "application/json")
-        .addHeader("APCA-API-KEY-ID", this.api_key)
-        .addHeader("APCA-API-SECRET-KEY", this.api_secret_key)
         .build();
 
         try {
-            Response response = this.client.newCall(request).execute();
+            Response response = this.manager.client.newCall(request).execute();
             String response_data = response.body().string();
             JSONObject jo = new JSONObject(response_data);
             String asset_id = jo.optString("asset_id");
@@ -60,6 +48,5 @@ public class SmaStrategy extends Strategy{
     }
 
     public void specific() {
-         
     }
 }

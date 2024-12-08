@@ -6,24 +6,14 @@ import java.util.ArrayList;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import io.github.cdimascio.dotenv.Dotenv;
-import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
 public class MarketDataProvider {
-    private final OkHttpClient client;
-    private final String api_key;
-    private final String api_secret_key;
+    private AlpacaKeysManager manager;
 
     MarketDataProvider() {
-        Dotenv dotenv = Dotenv.load();
-
-        this.api_key = dotenv.get("api_key");
-        this.api_secret_key = dotenv.get("api_secret_key");
-        // check if they exist
-
-        this.client = new OkHttpClient();
+        this.manager = new AlpacaKeysManager();
     }
     
     public void getDataFromMarket(String symbol) {
@@ -34,13 +24,10 @@ public class MarketDataProvider {
         Request request = new Request.Builder()
                 .url(requestUrl)
                 .get()
-                .addHeader("accept", "application/json")
-                .addHeader("APCA-API-KEY-ID", this.api_key)
-                .addHeader("APCA-API-SECRET-KEY", this.api_secret_key)
                 .build();
 
         try {
-            Response response = this.client.newCall(request).execute();
+            Response response = this.manager.client.newCall(request).execute();
             String jsonData = response.body().string();
             JSONObject Jobject = new JSONObject(jsonData);
 
@@ -59,12 +46,9 @@ public class MarketDataProvider {
         Request request = new Request.Builder()
                 .url(requestUrl)
                 .get()
-                .addHeader("accept", "application/json")
-                .addHeader("APCA-API-KEY-ID", this.api_key)
-                .addHeader("APCA-API-SECRET-KEY", this.api_secret_key)
                 .build();
         try {
-            Response response = this.client.newCall(request).execute();
+            Response response = this.manager.client.newCall(request).execute();
             String jsonData = response.body().string();
             JSONObject Jobject = new JSONObject(jsonData);
 
@@ -97,9 +81,8 @@ public class MarketDataProvider {
     }
 
     public void closeClient() {
-        this.client.connectionPool().evictAll();
-        this.client.dispatcher().executorService().shutdown();
-
+        this.manager.client.connectionPool().evictAll();
+        this.manager.client.dispatcher().executorService().shutdown();
     }
 }
 
