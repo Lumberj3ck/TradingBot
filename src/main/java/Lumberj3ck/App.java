@@ -2,7 +2,7 @@ package Lumberj3ck;
 // import java.util.ArrayList;
 
 public class App {
-    public static void main(String[] args){
+    public static void main(String[] args) {
         // MarketDataProvider provider = new MarketDataProvider();
 
         // provider.getDataFromMarket("AAPL");
@@ -16,7 +16,12 @@ public class App {
 
         // Runner.run(s, t);
 
-        Strategy s = new SmaStrategy();
-        s.isPositionOpen("NVDA");
+        // Strategy s = new SmaStrategy();
+        // s.isPositionOpen("NVDA");
+
+        UserDataProvider us = new UserDataProvider();
+        us.getBalance();
+        // us.getBalance();
+
     }
 }

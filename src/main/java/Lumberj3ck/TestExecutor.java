@@ -14,4 +14,10 @@ public class TestExecutor extends TradeExecutor {
         System.out.println(String.format("Heyyy you just sold %s of amount %s",
                 symbol, amount));
     }
+
+    @Override
+    protected boolean isEnoughFunds(Double stockPrice) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'isEnoughFunds'");
+    }
 }

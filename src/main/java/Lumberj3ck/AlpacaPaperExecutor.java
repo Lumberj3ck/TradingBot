@@ -1,5 +1,7 @@
 package Lumberj3ck;
 
+import java.io.IOException;
+
 import org.json.JSONObject;
 
 import io.github.cdimascio.dotenv.Dotenv;
@@ -22,6 +24,14 @@ abstract class AlpacaPaperExecutor extends TradeExecutor {
         this.api_secret_key = de.get("api_secret_key");
         this.url = "https://paper-api.alpaca.markets/v2/orders";
     }
+
+    // Complete isEnoughFunds function, implement stockPrice variable in the buy
+    // function (stock price * amount to buy)
+    @Override
+    protected boolean isEnoughFunds(Double stockPrice) {
+        UserDataProvider userInfo = new UserDataProvider();
+        return userInfo.getNonMarginableBuyingPower() >= stockPrice;
+    };
 
     public void buy(String symbol, String amount) {
         // Create HTTP client
@@ -94,6 +104,6 @@ abstract class AlpacaPaperExecutor extends TradeExecutor {
             e.printStackTrace();
         }
 
-    };
+    }
 
 }

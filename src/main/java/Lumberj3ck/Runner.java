@@ -1,12 +1,12 @@
 package Lumberj3ck;
 
 // import java.util.ArrayList;
-// import java.util.Arrays;
 
+// import java.util.Arrays;
 
 public class Runner {
 
-    public static void run(Strategy strategy, TradeExecutor executor){
+    public static void run(Strategy strategy, TradeExecutor executor) {
         // ArrayList<String> symbols = new ArrayList<>(Arrays.asList("AAPL", "GOOGL",
         // "MSFT"));
         String symbol = "AAPL";
@@ -31,7 +31,7 @@ public class Runner {
 
             // for now just sleep for hour
             int second = 1000;
-            int hour = second * 3600;
+            // int hour = second * 3600;
             try {
                 Thread.sleep(second * 5);
             } catch (InterruptedException e) {
