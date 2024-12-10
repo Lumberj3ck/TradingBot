@@ -35,23 +35,21 @@ public class Runner {
             long minutes = duration.toMinutesPart();
             String openClosed = isOpen ? "open" : "closed";
 
+            int second = 1000;
+            // int hour = second * 3600;
+            long sleep_time = second * 5;
+
             System.out.println("Market is" + openClosed);
             if (isOpen) {
                 stockCheckCycle(strategy, executor);
             } else {
                 System.out.println("Market will be open in " + duration.toDays() + " days " + hours + " hours and "
                         + minutes + " minutes.");
-                try {
-                    Thread.sleep(duration.toMillis());
-                } catch (InterruptedException e) {
-                    Thread.currentThread().interrupt();
-                }
+                sleep_time = duration.toMillis();
             }
             // for now just sleep for hour
-            int second = 1000;
-            // int hour = second * 3600;
             try {
-                Thread.sleep(second * 5);
+                Thread.sleep(sleep_time);
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
             }
