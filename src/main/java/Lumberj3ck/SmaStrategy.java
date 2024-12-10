@@ -1,7 +1,6 @@
 package Lumberj3ck;
 
 import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 
 import org.json.JSONObject;
@@ -29,7 +28,6 @@ public class SmaStrategy extends Strategy{
         int long_period = 200;
         LocalDate startSma200 = market_data_provider.getStartingDateForDays(long_period);
         ArrayList<Double> bars = market_data_provider.getClosingPrices(symbol,startSma200, "1D");
-        System.out.println(bars.size());
         Double smaShort = SimpleMovingAverageIndicator.calculate(bars, 90);
         Double smaLong = SimpleMovingAverageIndicator.calculate(bars, 200);
 

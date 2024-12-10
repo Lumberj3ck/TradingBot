@@ -62,6 +62,9 @@ public class MarketDataProvider {
         return new ArrayList<>();
     }
 
+    /**
+     * Retrieves starting date for a amount of days specified
+     */
     public LocalDate getStartingDateForDays(int amount){
         LocalDate now = LocalDate.now();
         String url = String.format("https://paper-api.alpaca.markets/v2/calendar?start=2016-12-01&end=%s", now, amount);
@@ -75,7 +78,12 @@ public class MarketDataProvider {
             String jsonData = response.body().string();
             JSONArray Jobject = new JSONArray(jsonData);
 
-            int index = Jobject.length() - amount - 1;
+            int index = Math.max(0, Jobject.length() - amount - 1);
+            
+            if (Jobject.length() - amount - 1 < 0){
+                throw new IllegalArgumentException("Requested amount of " + amount + " days exceeds available market data from starting date");
+            }
+
             JSONObject dateObj = Jobject.getJSONObject(index);
             LocalDate date = LocalDate.parse(dateObj.getString("date"));
             return date;
