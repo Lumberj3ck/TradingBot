@@ -14,8 +14,8 @@ public class App {
 
         // TestStrategy s = new TestStrategy();
         // TestExecutor t = new TestExecutor();
-        Strategy s = new SmaStrategy();
-        s.shouldEnterMarket("AAPL");
+        // Strategy s = new SmaStrategy();
+        // s.shouldEnterMarket("AAPL");
 
         // Runner.run(s, t);
 

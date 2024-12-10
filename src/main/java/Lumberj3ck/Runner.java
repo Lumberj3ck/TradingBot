@@ -14,9 +14,9 @@ public class Runner {
             String amount = "1";
 
             System.out.println(symbol);
-            if (!strategy.isPositionOpen(symbol) && strategy.shouldEnterMarket(symbol)) {
+            if (!executor.isPositionOpen(symbol) && strategy.shouldEnterMarket(symbol)) {
                 executor.buy(symbol, amount);
-            } else if (strategy.isPositionOpen(symbol) && strategy.shouldExitMarket(symbol)) {
+            } else if (executor.isPositionOpen(symbol) && strategy.shouldExitMarket(symbol)) {
                 executor.sell(symbol, amount);
             } else {
                 System.out.println(String.format("We are already bought %s, but don't wanna sell !!", symbol));

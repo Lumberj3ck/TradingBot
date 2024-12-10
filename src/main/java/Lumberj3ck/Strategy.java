@@ -8,10 +8,6 @@ abstract public class Strategy {
     //     this.executor = executor;
     // }
 
-    public boolean isPositionOpen(String symbol) {
-        // checking logic
-        return false;
-    }
 
     abstract public boolean shouldEnterMarket(String symbol);
 
