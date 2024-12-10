@@ -4,6 +4,8 @@ package Lumberj3ck;
 public class App {
     public static void main(String[] args) {
         // MarketDataProvider provider = new MarketDataProvider();
+        // ArrayList<String> s = provider.getAssetsList();
+        // System.out.println(s);
         // provider.getStartingDateForDays(200);
         // provider.getDataFromMarket("AAPL");
         // LocalDate startingDate = LocalDate.of(2024, 10, 1);
@@ -13,15 +15,16 @@ public class App {
         // provider.closeClient();
 
         // TestStrategy s = new TestStrategy();
-        // TestExecutor e = new TestExecutor();
+        TestExecutor e = new TestExecutor();
         Strategy s = new SmaStrategy();
-        AlpacaPaperExecutor e = new AlpacaPaperExecutor();
+        // AlpacaPaperExecutor e = new AlpacaPaperExecutor();
         // s.shouldEnterMarket("AAPL");
-
-        Runner.run(s, e);
+        Runner r = new Runner(); 
+        r.run(s, e);
 
         // UserDataProvider us = new UserDataProvider();
         // us.getBalance();
+
 
     }
 }

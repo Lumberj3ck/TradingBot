@@ -12,10 +12,12 @@ Strategies to implement:
 TODO:
 1. Update hardcoded functionality
 2. When strategy is initialised we can decide which tradingBroker should we use we can for example use test and may use papertrading implementation
+3. Add logging
+4. Add a bigger list of stocks
+5. make alpaca api url more changeable
 
 
 Purpose of TradeExecutor to add one more abstraction and at some point make test Executor which will extend TradeExecutor
 
 - [x] Discuss if we should decouple TradingExecutor from Abstract Strategy.  Because Strategy is supposed to be only responsible for entering market or exiting market, everything else is done by TradingExecutor
-- [ ] Move isPositionOpen from strategy to Executor
-- [ ] Refactor file structure move implementations to own folder
+- [x] Move isPositionOpen from strategy to Executor

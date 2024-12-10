@@ -1,15 +1,24 @@
 package Lumberj3ck;
 
 import java.time.Duration;
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Map;
 
 
 public class Runner {
-    private static void stockCheckCycle(Strategy strategy, TradeExecutor executor) {
-        ArrayList<String> symbols = new ArrayList<>(Arrays.asList("AAPL", "GOOGL",
-                "MSFT"));
+    public MarketDataProvider mp; 
+
+    Runner(){
+        this.mp = new MarketDataProvider();
+    }
+
+    private void stockCheckCycle(Strategy strategy, TradeExecutor executor) {
+        // ArrayList<String> symbols = new ArrayList<>(Arrays.asList("AAPL", "GOOGL",
+        //         "MSFT"));
+
+        List<String> symbols = this.mp.getAssetsList().subList(0, 50);
+
         for (String symbol : symbols) {
             String amount = "1";
 
@@ -19,13 +28,13 @@ public class Runner {
             } else if (executor.isPositionOpen(symbol) && strategy.shouldExitMarket(symbol)) {
                 executor.sell(symbol, amount);
             } else {
-                System.out.println(String.format("We are already bought %s, but don't wanna sell !!", symbol));
+                System.out.println(String.format("We are already bought %s, but don't wanna sell  !!", symbol));
+                System.out.println(LocalDateTime.now());
             }
         }
     }
 
-    public static void run(Strategy strategy, TradeExecutor executor) {
-        MarketDataProvider mp = new MarketDataProvider();
+    public void run(Strategy strategy, TradeExecutor executor) {
         while (true) {
             Map<String, Object> result = mp.isMarketOpen();
             Boolean isOpen = (Boolean) result.get("is_open");

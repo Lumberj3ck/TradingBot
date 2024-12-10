@@ -9,6 +9,7 @@ import java.util.Map;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+
 import okhttp3.Request;
 import okhttp3.Response;
 
@@ -56,6 +57,32 @@ public class MarketDataProvider {
             String jsonData = response.body().string();
             JSONObject Jobject = new JSONObject(jsonData);
             return buildData(Jobject, symbol);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return new ArrayList<>();
+    }
+
+    public ArrayList<String> getAssetsList(){
+
+        Request request = new Request.Builder()
+        .url("https://paper-api.alpaca.markets/v2/assets?status=active&exchange=NASDAQ&attributes=")
+        .get()
+        .build();
+
+        try {
+            Response response = this.manager.client.newCall(request).execute();
+            String jsonData = response.body().string();
+            JSONArray assets = new JSONArray(jsonData);
+            ArrayList<String> tradableAssets = new ArrayList<>();
+            
+            for (int i = 0; i < assets.length(); i++) {
+                JSONObject asset = assets.getJSONObject(i);
+                if (asset.getBoolean("tradable")) {
+                    tradableAssets.add(asset.getString("symbol"));
+                }
+            }
+            return tradableAssets;
         } catch (Exception e) {
             System.out.println(e);
         }
