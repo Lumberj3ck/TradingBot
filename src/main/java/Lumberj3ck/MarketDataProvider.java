@@ -62,6 +62,29 @@ public class MarketDataProvider {
         return new ArrayList<>();
     }
 
+    public LocalDate getStartingDateForDays(int amount){
+        LocalDate now = LocalDate.now();
+        String url = String.format("https://paper-api.alpaca.markets/v2/calendar?start=2016-12-01&end=%s", now, amount);
+        Request request = new Request.Builder()
+        .url(url)
+        .get()
+        .build();
+
+        try {
+            Response response = this.manager.client.newCall(request).execute();
+            String jsonData = response.body().string();
+            JSONArray Jobject = new JSONArray(jsonData);
+
+            int index = Jobject.length() - amount - 1;
+            JSONObject dateObj = Jobject.getJSONObject(index);
+            LocalDate date = LocalDate.parse(dateObj.getString("date"));
+            return date;
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return now;
+    }
+
     public ArrayList<Double> buildData(JSONObject jsonData, String symbol) {
         JSONObject bars = jsonData.getJSONObject("bars");
         JSONArray prices = bars.getJSONArray(symbol);
