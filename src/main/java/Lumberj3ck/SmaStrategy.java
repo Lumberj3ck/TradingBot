@@ -27,9 +27,9 @@ public class SmaStrategy extends Strategy{
     @Override
     public boolean shouldEnterMarket(String symbol) {
         int long_period = 200;
-        int weekends = amountOfWeekends(long_period);
-        LocalDate startSma200 = LocalDate.now().minus(long_period + weekends, ChronoUnit.DAYS);
+        LocalDate startSma200 = market_data_provider.getStartingDateForDays(long_period);
         ArrayList<Double> bars = market_data_provider.getClosingPrices(symbol,startSma200, "1D");
+        System.out.println(bars.size());
         Double smaShort = SimpleMovingAverageIndicator.calculate(bars, 90);
         Double smaLong = SimpleMovingAverageIndicator.calculate(bars, 200);
 

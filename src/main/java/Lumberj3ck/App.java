@@ -4,6 +4,7 @@ package Lumberj3ck;
 public class App {
     public static void main(String[] args) {
         // MarketDataProvider provider = new MarketDataProvider();
+        // provider.getStartingDateForDays(200);
         // provider.getDataFromMarket("AAPL");
         // LocalDate startingDate = LocalDate.of(2024, 10, 1);
         // ArrayList<Integer> cp = provider.getClosingPrices(startingDate, "1D");
@@ -11,14 +12,12 @@ public class App {
         // // provider.calculateSMA(cp);
         // provider.closeClient();
 
-        TestExecutor t = new TestExecutor();
-        Strategy s = new SmaStrategy();
         // TestStrategy s = new TestStrategy();
+        // TestExecutor t = new TestExecutor();
+        Strategy s = new SmaStrategy();
+        s.shouldEnterMarket("AAPL");
 
-        Runner.run(s, t);
-
-
-        // s.isPositionOpen("AAPL");
+        // Runner.run(s, t);
 
         // UserDataProvider us = new UserDataProvider();
         // us.getBalance();

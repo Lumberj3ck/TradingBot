@@ -47,7 +47,7 @@ public class Runner {
                         + minutes + " minutes.");
                 sleep_time = duration.toMillis();
             }
-            // for now just sleep for hour
+
             try {
                 Thread.sleep(sleep_time);
             } catch (InterruptedException e) {
