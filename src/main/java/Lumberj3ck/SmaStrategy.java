@@ -18,11 +18,6 @@ public class SmaStrategy extends Strategy{
         this.market_data_provider  = new MarketDataProvider();
     }
 
-    public int amountOfWeekends(int days){
-        int month = days / 30;
-        return month * 8;
-    }
-
     @Override
     public boolean shouldEnterMarket(String symbol) {
         int long_period = 200;
