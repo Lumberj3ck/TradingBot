@@ -13,16 +13,15 @@ public class App {
         // provider.closeClient();
 
         // TestStrategy s = new TestStrategy();
-        // TestExecutor t = new TestExecutor();
-        // Strategy s = new SmaStrategy();
+        // TestExecutor e = new TestExecutor();
+        Strategy s = new SmaStrategy();
+        AlpacaPaperExecutor e = new AlpacaPaperExecutor();
         // s.shouldEnterMarket("AAPL");
 
-        // Runner.run(s, t);
+        Runner.run(s, e);
 
         // UserDataProvider us = new UserDataProvider();
         // us.getBalance();
 
-        // AlpacaPaperExecutor a = new AlpacaPaperExecutor();
-        // a.buy("AAPL", "1");
     }
 }
