@@ -60,7 +60,4 @@ public class SmaStrategy extends Strategy{
         System.out.println("No assets for given symbol");
         return false;
     }
-
-    public void specific() {
-    }
 }
