@@ -5,6 +5,8 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 
 import org.json.JSONObject;
+
+import Lumberj3ck.indicators.SimpleMovingAverageIndicator;
 import okhttp3.Request;
 import okhttp3.Response;
 
@@ -27,8 +29,8 @@ public class SmaStrategy extends Strategy{
         int long_period = 200;
         int weekends = amountOfWeekends(long_period);
         LocalDate startSma200 = LocalDate.now().minus(long_period + weekends, ChronoUnit.DAYS);
-        ArrayList<Integer> bars = market_data_provider.getClosingPrices("AAPL",startSma200, "1D");
-        System.out.println(bars.size());
+        ArrayList<Double> bars = market_data_provider.getClosingPrices("AAPL",startSma200, "1D");
+        System.out.println(SimpleMovingAverageIndicator.calculate(bars));
         // Or get SMA for a specific index
         // System.out.println("SMA at index 0: " + shortSma.getValue(0));
 

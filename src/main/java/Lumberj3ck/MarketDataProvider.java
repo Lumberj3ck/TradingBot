@@ -37,7 +37,7 @@ public class MarketDataProvider {
         }
     }
 
-    public ArrayList<Integer> getClosingPrices(String symbol, LocalDate start, String timeframe) {
+    public ArrayList<Double> getClosingPrices(String symbol, LocalDate start, String timeframe) {
         String requestUrl = String.format(
                 "https://data.alpaca.markets/v2/stocks/bars?symbols=%s&timeframe=%s&start=%s&adjustment=raw&feed=sip&sort=asc",
                 symbol,
@@ -58,13 +58,13 @@ public class MarketDataProvider {
         return new ArrayList<>();
     }
 
-    public ArrayList<Integer> buildData(JSONObject jsonData, String symbol) {
+    public ArrayList<Double> buildData(JSONObject jsonData, String symbol) {
         JSONObject bars = jsonData.getJSONObject("bars");
         JSONArray prices = bars.getJSONArray(symbol);
-        ArrayList<Integer> finalPrices = new ArrayList<>();
+        ArrayList<Double> finalPrices = new ArrayList<>();
         for (Object priceObj : prices) {
             JSONObject price = (JSONObject) priceObj;
-            finalPrices.add(price.getInt("c"));
+            finalPrices.add(price.getDouble("c"));
         }
         return finalPrices;
     }
