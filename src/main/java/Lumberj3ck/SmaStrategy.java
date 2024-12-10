@@ -4,15 +4,7 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 
-import javax.swing.text.StyledEditorKit;
-
 import org.json.JSONObject;
-import org.ta4j.core.indicators.SMAIndicator;
-import org.ta4j.core.indicators.helpers.ClosePriceIndicator;
-import org.ta4j.core.Bar;
-import org.ta4j.core.BaseBar;
-import org.ta4j.core.BaseBarSeries;
-
 import okhttp3.Request;
 import okhttp3.Response;
 
@@ -35,21 +27,8 @@ public class SmaStrategy extends Strategy{
         int long_period = 200;
         int weekends = amountOfWeekends(long_period);
         LocalDate startSma200 = LocalDate.now().minus(long_period + weekends, ChronoUnit.DAYS);
-        ArrayList<Bar> bars = this.market_data_provider.getClosingPrices("AAPL",startSma200, "1D");
-        BaseBarSeries series = new BaseBarSeries();
-        Bar prevBar = null;
-        for (Bar bar : bars) {
-            if (prevBar == null || bar.getEndTime().isAfter(prevBar.getEndTime())) {
-                series.addBar(bar);
-                prevBar = bar;
-            }
-        }
-        
-        ClosePriceIndicator closePrice = new ClosePriceIndicator(series);
-        SMAIndicator shortSma = new SMAIndicator(closePrice, 5);
-        // Get the SMA value for the latest/most recent bar
-        System.out.println(series.getBarCount());
-        System.out.println("Latest SMA value: " + shortSma.getValue(series.getEndIndex()));
+        ArrayList<Integer> bars = market_data_provider.getClosingPrices("AAPL",startSma200, "1D");
+        System.out.println(bars.size());
         // Or get SMA for a specific index
         // System.out.println("SMA at index 0: " + shortSma.getValue(0));
 
