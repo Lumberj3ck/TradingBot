@@ -1,4 +1,3 @@
-
 Goals:
 Create abstractions to create freely strategies
 
@@ -15,6 +14,7 @@ TODO:
 3. Add logging
 4. Add a bigger list of stocks
 5. make alpaca api url more changeable
+6. Add stops orders for buying
 
 
 Purpose of TradeExecutor to add one more abstraction and at some point make test Executor which will extend TradeExecutor
