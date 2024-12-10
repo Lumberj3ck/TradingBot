@@ -1,7 +1,11 @@
 package Lumberj3ck;
 
+import java.time.Duration;
 import java.time.LocalDate;
+import java.time.OffsetDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -67,6 +71,36 @@ public class MarketDataProvider {
             finalPrices.add(price.getDouble("c"));
         }
         return finalPrices;
+    }
+
+    public Map<String, Object> isMarketOpen(){
+        Request request = new Request.Builder()
+        .url("https://paper-api.alpaca.markets/v2/clock")
+        .get()
+        .build();
+        Map<String, Object> result = new HashMap<>();
+
+        try {
+            Response response = this.manager.client.newCall(request).execute();
+            String jsonData = response.body().string();
+            JSONObject Jobject = new JSONObject(jsonData);
+            boolean isOpen = Jobject.getBoolean("is_open");
+
+            String startTime = Jobject.getString("timestamp");
+            String endTime = Jobject.getString("next_open");
+
+            OffsetDateTime start = OffsetDateTime.parse(startTime);
+            OffsetDateTime end = OffsetDateTime.parse(endTime);
+
+            Duration duration = Duration.between(start, end);
+
+            result.put("is_open", isOpen);
+            result.put("leftToNext", duration);
+            return result;
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return result;
     }
 
     public void closeClient() {
