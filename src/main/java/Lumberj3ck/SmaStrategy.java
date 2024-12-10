@@ -29,7 +29,7 @@ public class SmaStrategy extends Strategy{
         int long_period = 200;
         int weekends = amountOfWeekends(long_period);
         LocalDate startSma200 = LocalDate.now().minus(long_period + weekends, ChronoUnit.DAYS);
-        ArrayList<Double> bars = market_data_provider.getClosingPrices("AAPL",startSma200, "1D");
+        ArrayList<Double> bars = market_data_provider.getClosingPrices(symbol,startSma200, "1D");
         Double smaShort = SimpleMovingAverageIndicator.calculate(bars, 90);
         Double smaLong = SimpleMovingAverageIndicator.calculate(bars, 200);
 

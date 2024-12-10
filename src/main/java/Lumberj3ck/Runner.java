@@ -1,5 +1,8 @@
 package Lumberj3ck;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 // import java.util.ArrayList;
 
 // import java.util.Arrays;
@@ -7,28 +10,21 @@ package Lumberj3ck;
 public class Runner {
 
     public static void run(Strategy strategy, TradeExecutor executor) {
-        // ArrayList<String> symbols = new ArrayList<>(Arrays.asList("AAPL", "GOOGL",
-        // "MSFT"));
-        String symbol = "AAPL";
+        ArrayList<String> symbols = new ArrayList<>(Arrays.asList("AAPL", "GOOGL",
+                "MSFT"));
 
         while (true) {
-            // for (String symbol : symbols) {
-            // if (!strategy.isPositionOpen(symbol) && strategy.shouldEnterMarket(symbol)) {
-            // // for now hardcoded
-            // String amount = "1";
-            // strategy.buy(symbol, amount);
-            // } else if (strategy.isPositionOpen(symbol) &&
-            // strategy.shouldExitMarket(symbol)) {
-            // strategy.sell(symbol);
-            // }
-            // }
-            String amount = "1";
-            if (!strategy.isPositionOpen(symbol) && strategy.shouldEnterMarket(symbol)) {
-                executor.buy(symbol, amount);
-            } else if (strategy.isPositionOpen(symbol) && strategy.shouldExitMarket(symbol)) {
-                executor.sell(symbol, amount);
-            } else {
-                System.out.println("We are already bought this, but don't wanna sell !!");
+            for (String symbol : symbols) {
+                String amount = "1";
+
+                System.out.println(symbol);
+                if (!strategy.isPositionOpen(symbol) && strategy.shouldEnterMarket(symbol)) {
+                    executor.buy(symbol, amount);
+                } else if (strategy.isPositionOpen(symbol) && strategy.shouldExitMarket(symbol)) {
+                    executor.sell(symbol, amount);
+                } else {
+                    System.out.println(String.format("We are already bought %s, but don't wanna sell !!", symbol) );
+                }
             }
 
             // for now just sleep for hour
