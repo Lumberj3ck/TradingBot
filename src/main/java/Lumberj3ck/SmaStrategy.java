@@ -30,17 +30,17 @@ public class SmaStrategy extends Strategy{
         int weekends = amountOfWeekends(long_period);
         LocalDate startSma200 = LocalDate.now().minus(long_period + weekends, ChronoUnit.DAYS);
         ArrayList<Double> bars = market_data_provider.getClosingPrices("AAPL",startSma200, "1D");
-        System.out.println(SimpleMovingAverageIndicator.calculate(bars));
-        // Or get SMA for a specific index
-        // System.out.println("SMA at index 0: " + shortSma.getValue(0));
+        Double smaShort = SimpleMovingAverageIndicator.calculate(bars, 90);
+        Double smaLong = SimpleMovingAverageIndicator.calculate(bars, 200);
 
-        // System.out.print(shortSma);
-        return false;
+        String logString = String.format("Short SMA: %s; Long SMA: %s", smaShort, smaLong);
+        System.out.println(logString);
+        return smaShort < smaLong;
     }
 
     @Override
     public boolean shouldExitMarket(String symbol) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return !shouldEnterMarket(symbol);
     }
 
     @Override

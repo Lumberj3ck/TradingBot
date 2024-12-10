@@ -11,13 +11,13 @@ public class App {
         // // provider.calculateSMA(cp);
         // provider.closeClient();
 
-        // TestExecutor t = new TestExecutor();
+        TestExecutor t = new TestExecutor();
+        Strategy s = new SmaStrategy();
         // TestStrategy s = new TestStrategy();
 
-        // Runner.run(s, t);
+        Runner.run(s, t);
 
-        Strategy s = new SmaStrategy();
-        s.shouldEnterMarket("AAPL");
+
         // s.isPositionOpen("AAPL");
 
         // UserDataProvider us = new UserDataProvider();

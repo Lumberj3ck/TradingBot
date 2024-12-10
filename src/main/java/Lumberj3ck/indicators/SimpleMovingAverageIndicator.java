@@ -1,11 +1,16 @@
 package Lumberj3ck.indicators;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class SimpleMovingAverageIndicator {
-    public static Integer calculate(ArrayList<Double> prices) {
-        int priceSum = 0;
-        for (double cp : prices) {
+    public static Double calculate(List<Double> prices, int index) {
+        Double priceSum = 0.0;
+        int startIndex = prices.size() - index;
+        if (startIndex < 0){
+            startIndex = 0;
+        }
+        List<Double> pricesStartingFrom = prices.subList(startIndex,  prices.size());
+        for (double cp : pricesStartingFrom) {
             priceSum += cp;
         }
         return priceSum / prices.size();

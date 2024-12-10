@@ -27,6 +27,8 @@ public class Runner {
                 executor.buy(symbol, amount);
             } else if (strategy.isPositionOpen(symbol) && strategy.shouldExitMarket(symbol)) {
                 executor.sell(symbol, amount);
+            } else {
+                System.out.println("We are already bought this, but don't wanna sell !!");
             }
 
             // for now just sleep for hour
