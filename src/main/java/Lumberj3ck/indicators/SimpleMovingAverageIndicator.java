@@ -13,6 +13,8 @@ public class SimpleMovingAverageIndicator {
         for (double cp : pricesStartingFrom) {
             priceSum += cp;
         }
+
+        System.out.println(priceSum / prices.size());
         return priceSum / prices.size();
     }
 

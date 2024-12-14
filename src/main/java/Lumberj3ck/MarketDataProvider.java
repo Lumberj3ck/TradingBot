@@ -63,19 +63,19 @@ public class MarketDataProvider {
         return new ArrayList<>();
     }
 
-    public ArrayList<String> getAssetsList(){
+    public ArrayList<String> getAssetsList() {
 
         Request request = new Request.Builder()
-        .url("https://paper-api.alpaca.markets/v2/assets?status=active&exchange=NASDAQ&attributes=")
-        .get()
-        .build();
+                .url("https://paper-api.alpaca.markets/v2/assets?status=active&exchange=NASDAQ&attributes=")
+                .get()
+                .build();
 
         try {
             Response response = this.manager.client.newCall(request).execute();
             String jsonData = response.body().string();
             JSONArray assets = new JSONArray(jsonData);
             ArrayList<String> tradableAssets = new ArrayList<>();
-            
+
             for (int i = 0; i < assets.length(); i++) {
                 JSONObject asset = assets.getJSONObject(i);
                 if (asset.getBoolean("tradable")) {
@@ -92,13 +92,13 @@ public class MarketDataProvider {
     /**
      * Retrieves starting date for a amount of days specified
      */
-    public LocalDate getStartingDateForDays(int amount){
+    public LocalDate getStartingDateForDays(int amount) {
         LocalDate now = LocalDate.now();
         String url = String.format("https://paper-api.alpaca.markets/v2/calendar?start=2016-12-01&end=%s", now, amount);
         Request request = new Request.Builder()
-        .url(url)
-        .get()
-        .build();
+                .url(url)
+                .get()
+                .build();
 
         try {
             Response response = this.manager.client.newCall(request).execute();
@@ -106,9 +106,10 @@ public class MarketDataProvider {
             JSONArray Jobject = new JSONArray(jsonData);
 
             int index = Math.max(0, Jobject.length() - amount - 1);
-            
-            if (Jobject.length() - amount - 1 < 0){
-                throw new IllegalArgumentException("Requested amount of " + amount + " days exceeds available market data from starting date");
+
+            if (Jobject.length() - amount - 1 < 0) {
+                throw new IllegalArgumentException(
+                        "Requested amount of " + amount + " days exceeds available market data from starting date");
             }
 
             JSONObject dateObj = Jobject.getJSONObject(index);
@@ -131,11 +132,11 @@ public class MarketDataProvider {
         return finalPrices;
     }
 
-    public Map<String, Object> isMarketOpen(){
+    public Map<String, Object> isMarketOpen() {
         Request request = new Request.Builder()
-        .url("https://paper-api.alpaca.markets/v2/clock")
-        .get()
-        .build();
+                .url("https://paper-api.alpaca.markets/v2/clock")
+                .get()
+                .build();
         Map<String, Object> result = new HashMap<>();
 
         try {
