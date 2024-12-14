@@ -6,13 +6,14 @@ public class SimpleMovingAverageIndicator {
     public static Double calculate(List<Double> prices, int index) {
         Double priceSum = 0.0;
         int startIndex = prices.size() - index;
-        if (startIndex < 0){
+        if (startIndex < 0) {
             startIndex = 0;
         }
-        List<Double> pricesStartingFrom = prices.subList(startIndex,  prices.size());
+        List<Double> pricesStartingFrom = prices.subList(startIndex, prices.size());
         for (double cp : pricesStartingFrom) {
             priceSum += cp;
         }
         return priceSum / prices.size();
-    }    
+    }
+
 }
