@@ -3,7 +3,7 @@ package Lumberj3ck;
 import java.util.Arrays;
 import java.util.List;
 
-import Lumberj3ck.indicators.*;
+import Lumberj3ck.indicators.RelativeStrengthIndexIndicator;
 
 public class App {
     public static void main(String[] args) {
