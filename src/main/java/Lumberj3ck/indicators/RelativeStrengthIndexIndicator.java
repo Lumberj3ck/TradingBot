@@ -5,14 +5,14 @@ import java.util.List;
 
 public class RelativeStrengthIndexIndicator {
 
-    public static List<List<Double>> getPriceChanges(List<Double> prices, int index) {
+    public static List<List<Double>> getPriceChanges(List<Double> prices) {
         List<List<Double>> priceChanges = new ArrayList<List<Double>>();
 
-        int startIndex = prices.size() - index;
+        int startIndex = prices.size() - 14;
         if (startIndex < 0) {
             startIndex = 0;
         }
-        prices.subList(index, prices.size());
+        prices.subList(startIndex, prices.size());
 
         List<Double> gains = new ArrayList<Double>();
         List<Double> losses = new ArrayList<Double>();
@@ -33,16 +33,18 @@ public class RelativeStrengthIndexIndicator {
         return priceChanges;
     }
 
-    public static Double calculate(List<Double> prices, int index) {
-        List<List<Double>> priceChanges = getPriceChanges(prices, index);
+    public static Double calculate(ArrayList<Double> prices) {
+        List<List<Double>> priceChanges = getPriceChanges(prices);
         List<Double> gains = priceChanges.get(0);
         List<Double> losses = priceChanges.get(1);
 
-        Double avgGains = gains.stream().mapToDouble(Double::doubleValue).sum() / (index - 1);
-        Double avgLosses = losses.stream().mapToDouble(Double::doubleValue).sum() / (index - 1);
+        Double avgGains = gains.stream().mapToDouble(Double::doubleValue).sum() / 13;
+        Double avgLosses = losses.stream().mapToDouble(Double::doubleValue).sum() / 13;
 
         Double rs = avgGains / avgLosses;
         Double rsi = 100 - (100 / (1 + rs));
+
+        System.out.println(rsi);
 
         return rsi;
     }
