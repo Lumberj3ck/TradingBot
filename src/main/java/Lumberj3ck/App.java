@@ -2,10 +2,8 @@ package Lumberj3ck;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
-import Lumberj3ck.indicators.RelativeStrengthIndexIndicator;
+import Lumberj3ck.indicators.SimpleMovingAverageIndicator;
 
 public class App {
     public static void main(String[] args) {
