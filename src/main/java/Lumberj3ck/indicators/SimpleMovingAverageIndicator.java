@@ -1,8 +1,12 @@
 package Lumberj3ck.indicators;
 
 import java.util.List;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class SimpleMovingAverageIndicator {
+    private static final Logger logger = LogManager.getRootLogger();
+
     public static Double calculate(List<Double> prices, int index) {
         Double priceSum = 0.0;
         int startIndex = prices.size() - index;
@@ -14,8 +18,9 @@ public class SimpleMovingAverageIndicator {
             priceSum += cp;
         }
 
-        System.out.println(priceSum / prices.size());
-        return priceSum / prices.size();
+        Double sma = priceSum / prices.size();
+        logger.info("Calculated SMA: {}", sma);
+        return sma;
     }
 
 }

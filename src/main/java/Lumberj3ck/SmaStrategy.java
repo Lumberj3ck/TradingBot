@@ -21,7 +21,6 @@ public class SmaStrategy extends Strategy {
         Double smaLong = SimpleMovingAverageIndicator.calculate(bars, 200);
 
         String logString = String.format("Short SMA: %s; Long SMA: %s", smaShort, smaLong);
-        System.out.println(logString);
         return smaShort < smaLong;
     }
 

@@ -8,12 +8,10 @@ public class App {
         // provider.getAssetsList();
 
         // ArrayList<String> s = provider.getAssetsList();
-        // System.out.println(s);
         // provider.getStartingDateForDays(200);
         // provider.getDataFromMarket("AAPL");
         // LocalDate startingDate = LocalDate.of(2024, 10, 1);
         // ArrayList<Double> cp = provider.getClosingPrices("NVDA", startingDate, "1D");
-        // // System.out.println(cp);
         // // provider.calculateSMA(cp);
         // provider.closeClient();
 
