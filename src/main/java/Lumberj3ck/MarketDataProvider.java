@@ -7,14 +7,19 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import okhttp3.Request;
 import okhttp3.Response;
 
+
+
 public class MarketDataProvider {
     private AlpacaKeysManager manager;
+    private static final Logger logger = LogManager.getRootLogger(); 
 
     MarketDataProvider() {
         this.manager = new AlpacaKeysManager();
@@ -24,7 +29,7 @@ public class MarketDataProvider {
         String requestUrl = String.format(
                 "https://data.alpaca.markets/v2/stocks/trades?symbols=%s&start=2024-09-01&limit=1000&feed=sip&sort=asc",
                 symbol);
-        System.out.println(requestUrl);
+        logger.debug("Making new request to", requestUrl);
         Request request = new Request.Builder()
                 .url(requestUrl)
                 .get()
@@ -35,10 +40,10 @@ public class MarketDataProvider {
             String jsonData = response.body().string();
             JSONObject Jobject = new JSONObject(jsonData);
 
-            System.out.println(Jobject.optString("next_page_toke"));
-            // System.out.println(Jobject.toString());
+            logger.debug("Next page token {}", Jobject.optString("next_page_token"));
+            logger.info("Retrieved market info for {}", symbol);
         } catch (Exception e) {
-            System.out.println(e);
+            logger.error(e);
         }
     }
 
@@ -47,7 +52,7 @@ public class MarketDataProvider {
                 "https://data.alpaca.markets/v2/stocks/bars?symbols=%s&timeframe=%s&start=%s&adjustment=raw&feed=sip&sort=asc",
                 symbol,
                 timeframe, start);
-        System.out.println(requestUrl);
+        logger.debug("Making new request to", requestUrl);
         Request request = new Request.Builder()
                 .url(requestUrl)
                 .get()
@@ -56,9 +61,11 @@ public class MarketDataProvider {
             Response response = this.manager.client.newCall(request).execute();
             String jsonData = response.body().string();
             JSONObject Jobject = new JSONObject(jsonData);
+
+            logger.info("Retrieved closing prices for {} from {} aggregated by {}", symbol, start, timeframe);
             return buildData(Jobject, symbol);
         } catch (Exception e) {
-            System.out.println(e);
+            logger.error(e);
         }
         return new ArrayList<>();
     }
@@ -82,9 +89,11 @@ public class MarketDataProvider {
                     tradableAssets.add(asset.getString("symbol"));
                 }
             }
+            logger.info("Getting assets list");
+            logger.debug(tradableAssets);
             return tradableAssets;
         } catch (Exception e) {
-            System.out.println(e);
+            logger.error(e);
         }
         return new ArrayList<>();
     }
@@ -95,6 +104,7 @@ public class MarketDataProvider {
     public LocalDate getStartingDateForDays(int amount) {
         LocalDate now = LocalDate.now();
         String url = String.format("https://paper-api.alpaca.markets/v2/calendar?start=2016-12-01&end=%s", now, amount);
+        logger.debug("Making new request to", url);
         Request request = new Request.Builder()
                 .url(url)
                 .get()
@@ -114,9 +124,11 @@ public class MarketDataProvider {
 
             JSONObject dateObj = Jobject.getJSONObject(index);
             LocalDate date = LocalDate.parse(dateObj.getString("date"));
+
+            logger.info("Getting starting date for amount of {} periods", amount);
             return date;
         } catch (Exception e) {
-            System.out.println(e);
+            logger.error(e);
         }
         return now;
     }
@@ -155,9 +167,11 @@ public class MarketDataProvider {
 
             result.put("is_open", isOpen);
             result.put("leftToNext", duration);
+            logger.info("Retriving data if market open");
+            logger.debug(jsonData);
             return result;
         } catch (Exception e) {
-            System.out.println(e);
+            logger.error(e);
         }
         return result;
     }

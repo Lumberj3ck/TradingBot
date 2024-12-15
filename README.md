@@ -22,6 +22,10 @@ Run jar file:
 java -jar TradingBot.jar
 ```
 
+### Logging 
+
+In order to see more logging output, set the logging level in log4j2.xml file inside of resourses folder to debug mode. For decreasing logging output set higher level of logging for example error. 
+
 
 Goals:  
 Create abstractions to create freely strategies
