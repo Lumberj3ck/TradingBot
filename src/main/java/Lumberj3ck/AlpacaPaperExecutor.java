@@ -1,5 +1,7 @@
 package Lumberj3ck;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.json.JSONObject;
 
 import okhttp3.MediaType;
@@ -11,6 +13,7 @@ class AlpacaPaperExecutor extends TradeExecutor {
 
     private final String url;
     private AlpacaKeysManager manager;
+    private static final Logger logger = LogManager.getRootLogger(); 
 
     AlpacaPaperExecutor() {
         this.manager = new AlpacaKeysManager();
@@ -20,6 +23,8 @@ class AlpacaPaperExecutor extends TradeExecutor {
     @Override
     public boolean isPositionOpen(String symbol){
         String request_url = String.format("https://paper-api.alpaca.markets/v2/positions/%s", symbol);
+
+        logger.debug("Making request to {}", request_url);
 
         Request request = new Request.Builder()
         .url(request_url)
@@ -31,14 +36,14 @@ class AlpacaPaperExecutor extends TradeExecutor {
             String response_data = response.body().string();
             JSONObject jo = new JSONObject(response_data);
             String asset_id = jo.optString("asset_id");
-            System.out.println(asset_id);
+            logger.info("Asset with folowing id {} ", asset_id);
             if (asset_id.length() > 0){
                 return true;
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error(e);
         }
-        System.out.println("No assets for given symbol");
+        logger.info("No assets for given symbol");
         return false;
     }
 
@@ -68,14 +73,13 @@ class AlpacaPaperExecutor extends TradeExecutor {
 
         try (Response response = this.manager.client.newCall(request).execute()) {
             if (response.isSuccessful()) {
-                System.out.println("Order placed successfully:");
-                System.out.println(response.body().string());
+                logger.info("Buy order placed successfully for {} shares of {}", amount, symbol);
+                logger.debug("Order response: {}", response.body().string());
             } else {
-                System.err.println("Error placing order: " + response.code());
-                System.err.println(response.body().string());
+                logger.error("Error placing buy order: {} - {}", response.code(), response.body().string());
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("Exception while placing buy order", e);
         }
     }
 
@@ -97,14 +101,13 @@ class AlpacaPaperExecutor extends TradeExecutor {
 
         try (Response response = this.manager.client.newCall(request).execute()) {
             if (response.isSuccessful()) {
-                System.out.println("Order placed successfully:");
-                System.out.println(response.body().string());
+                logger.info("Sell order placed successfully for {} shares of {}", amount, symbol);
+                logger.debug("Order response: {}", response.body().string());
             } else {
-                System.err.println("Error placing order: " + response.code());
-                System.err.println(response.body().string());
+                logger.error("Error placing sell order: {} - {}", response.code(), response.body().string());
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("Exception while placing sell order", e);
         }
 
     }
