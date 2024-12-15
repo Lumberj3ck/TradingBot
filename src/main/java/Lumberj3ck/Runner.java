@@ -43,7 +43,7 @@ public class Runner {
             Boolean isOpen = (Boolean) result.get("is_open");
             Duration duration = (Duration) result.get("leftToNext");
 
-            long hours = duration.toDaysPart();
+            long hours = duration.toHoursPart();
             long minutes = duration.toMinutesPart();
             String openClosed = isOpen ? "open" : "closed";
 
@@ -56,7 +56,7 @@ public class Runner {
                 stockCheckCycle(strategy, executor);
             } else {
                 logger.info("Market will be open in {} days {} hours and {} minutes", 
-                    duration.toDays(), hours, minutes);
+                    duration.toDaysPart(), hours, minutes);
                 sleep_time = duration.toMillis();
             }
 

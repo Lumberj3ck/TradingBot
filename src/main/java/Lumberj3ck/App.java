@@ -2,8 +2,11 @@ package Lumberj3ck;
 
 public class App {
     public static void main(String[] args) {
-        MarketDataProvider provider = new MarketDataProvider();
-        provider.getDataFromMarket("AAPL");
+        // --------- Testing Market Data Provider
+        // MarketDataProvider provider = new MarketDataProvider();
+        // provider.getDataFromMarket("AAPL");
+        // provider.getAssetsList();
+
         // ArrayList<String> s = provider.getAssetsList();
         // System.out.println(s);
         // provider.getStartingDateForDays(200);
@@ -14,17 +17,18 @@ public class App {
         // // provider.calculateSMA(cp);
         // provider.closeClient();
 
-        // // TestStrategy s = new TestStrategy();
-        // TestExecutor e = new TestExecutor();
-        // Strategy s = new SmaStrategy();
-        // // AlpacaPaperExecutor e = new AlpacaPaperExecutor();
-        // s.shouldEnterMarket("AAPL");
-        // Runner r = new Runner();
-        // r.run(s, e);
 
         // SimpleMovingAverageIndicator.calculate(cp, 10);
         // SimpleMovingAverageIndicator.calculate(cp, 50);
         // RelativeStrengthIndexIndicator.calculate(cp, 14);
-
+        
+        // -------------- Testing Runner with Strategies ----
+        TestStrategy s = new TestStrategy();
+        TestExecutor e = new TestExecutor();
+        // Strategy s = new SmaStrategy();
+        // // AlpacaPaperExecutor e = new AlpacaPaperExecutor();
+        // s.shouldEnterMarket("AAPL");
+        Runner r = new Runner();
+        r.run(s, e);
     }
 }
