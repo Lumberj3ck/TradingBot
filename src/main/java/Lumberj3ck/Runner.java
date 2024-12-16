@@ -4,6 +4,7 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -11,7 +12,7 @@ public class Runner {
     public MarketDataProvider mp;
     private static final Logger logger = LogManager.getRootLogger();
 
-    Runner(){
+    public Runner(){
         this.mp = new MarketDataProvider();
         logger.debug("Initialized Runner with new MarketDataProvider");
     }

@@ -8,7 +8,7 @@ import Lumberj3ck.indicators.RelativeStrengthIndexIndicator;
 public class RSIStrategy extends Strategy {
     private MarketDataProvider mdp;
 
-    RSIStrategy() {
+    public RSIStrategy() {
         this.mdp = new MarketDataProvider();
     }
 

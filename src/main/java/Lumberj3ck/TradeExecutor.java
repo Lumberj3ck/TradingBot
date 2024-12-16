@@ -1,6 +1,6 @@
 package Lumberj3ck;
 
-abstract class TradeExecutor {
+abstract public class TradeExecutor {
 
     protected abstract boolean isEnoughFunds(Double stockPrice);
 

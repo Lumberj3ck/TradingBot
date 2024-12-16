@@ -8,7 +8,7 @@ import Lumberj3ck.indicators.SimpleMovingAverageIndicator;
 public class SmaStrategy extends Strategy {
     private MarketDataProvider market_data_provider;
 
-    SmaStrategy() {
+    public SmaStrategy() {
         this.market_data_provider = new MarketDataProvider();
     }
 

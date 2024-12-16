@@ -9,13 +9,13 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-class AlpacaPaperExecutor extends TradeExecutor {
+public class AlpacaPaperExecutor extends TradeExecutor {
 
     private final String url;
     private AlpacaKeysManager manager;
     private static final Logger logger = LogManager.getRootLogger(); 
 
-    AlpacaPaperExecutor() {
+    public AlpacaPaperExecutor() {
         this.manager = new AlpacaKeysManager();
         this.url = "https://paper-api.alpaca.markets/v2/orders";
     }
