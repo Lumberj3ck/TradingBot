@@ -9,9 +9,11 @@ import org.apache.logging.log4j.core.LoggerContext;
 import org.apache.logging.log4j.core.config.Configuration;
 import org.apache.logging.log4j.core.config.LoggerConfig;
 import Lumberj3ck.AlpacaPaperExecutor;
-import Lumberj3ck.RSIStrategy;
+import Lumberj3ck.DailyRSIStrategy;
+import Lumberj3ck.HourlyRSIStrategy;
 import Lumberj3ck.Runner;
-import Lumberj3ck.SmaStrategy;
+import Lumberj3ck.DailySMAStrategy;
+import Lumberj3ck.HourlySMAStrategy;
 import Lumberj3ck.Strategy;
 import Lumberj3ck.TestExecutor;
 import Lumberj3ck.TestStrategy;
@@ -58,7 +60,8 @@ public class HelloFX extends Application {
         outputArea = new TextArea();
         outputArea.setEditable(false);
 
-        VBox layout = new VBox(10, strategyLabel, strategySelector, executorLabel, executorSelector, executeButton, outputArea);
+        VBox layout = new VBox(10, strategyLabel, strategySelector, executorLabel, executorSelector, executeButton,
+                outputArea);
         layout.setPadding(new javafx.geometry.Insets(10));
 
         executeButton.setOnAction(e -> runStrategy());
@@ -95,24 +98,25 @@ public class HelloFX extends Application {
     private void addTextAreaAppender() {
         LoggerContext context = (LoggerContext) LogManager.getContext(false);
         Configuration config = context.getConfiguration();
-        
+
         Appender appender = TextAreaAppender.createAppender();
         appender.start();
         config.addAppender(appender);
-        
+
         for (LoggerConfig loggerConfig : config.getLoggers().values()) {
             loggerConfig.addAppender(appender, null, null);
         }
-        
+
         config.getRootLogger().addAppender(appender, null, null);
-        
+
         context.updateLoggers();
     }
 
-
     private void loadStrategiesAndExecutors() {
-        strategies.put("SmaStrategy", new SmaStrategy());
-        strategies.put("RsiStrategy", new RSIStrategy());
+        strategies.put("DailySMAStrategy", new DailySMAStrategy());
+        strategies.put("HourlySMAStrategy", new HourlySMAStrategy());
+        strategies.put("DailyRSIStrategy", new DailyRSIStrategy());
+        strategies.put("HourlyRSIStrategy", new HourlyRSIStrategy());
         strategies.put("TestStrategy", new TestStrategy());
 
         executors.put("AlpacaPaperExecutor", new AlpacaPaperExecutor());
@@ -120,33 +124,34 @@ public class HelloFX extends Application {
     }
 
     // private void setupTrayIcon() {
-    //     if (!SystemTray.isSupported()) {
-    //         System.out.println("System tray not supported!");
-    //         return;
-    //     }
+    // if (!SystemTray.isSupported()) {
+    // System.out.println("System tray not supported!");
+    // return;
+    // }
 
-    //     SystemTray tray = SystemTray.getSystemTray();
-    //     Image image = Toolkit.getDefaultToolkit().getImage("icon.png"); // Provide path to icon
+    // SystemTray tray = SystemTray.getSystemTray();
+    // Image image = Toolkit.getDefaultToolkit().getImage("icon.png"); // Provide
+    // path to icon
 
-    //     PopupMenu popup = new PopupMenu();
-    //     MenuItem exitItem = new MenuItem("Exit");
-    //     exitItem.addActionListener(e -> System.exit(0));
-    //     popup.add(exitItem);
+    // PopupMenu popup = new PopupMenu();
+    // MenuItem exitItem = new MenuItem("Exit");
+    // exitItem.addActionListener(e -> System.exit(0));
+    // popup.add(exitItem);
 
-    //     trayIcon = new TrayIcon(image, "Strategy Executor", popup);
-    //     trayIcon.setImageAutoSize(true);
+    // trayIcon = new TrayIcon(image, "Strategy Executor", popup);
+    // trayIcon.setImageAutoSize(true);
 
-    //     try {
-    //         tray.add(trayIcon);
-    //     } catch (AWTException e) {
-    //         System.out.println("TrayIcon could not be added.");
-    //     }
+    // try {
+    // tray.add(trayIcon);
+    // } catch (AWTException e) {
+    // System.out.println("TrayIcon could not be added.");
+    // }
     // }
 
     // private void showTrayMessage(String title, String message) {
-    //     if (trayIcon != null) {
-    //         trayIcon.displayMessage(title, message, MessageType.INFO);
-    //     }
+    // if (trayIcon != null) {
+    // trayIcon.displayMessage(title, message, MessageType.INFO);
+    // }
     // }
 
     public static void main(String[] args) {
