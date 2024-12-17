@@ -3,6 +3,15 @@ package Lumberj3ck.javaFxApp;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.core.Appender;
+import org.apache.logging.log4j.core.LoggerContext;
+import org.apache.logging.log4j.core.config.Configuration;
+import org.apache.logging.log4j.core.config.LoggerConfig;
+import org.apache.logging.log4j.core.config.builder.api.AppenderComponentBuilder;
+import org.apache.logging.log4j.core.config.builder.impl.BuiltConfiguration;
+
 import Lumberj3ck.AlpacaPaperExecutor;
 import Lumberj3ck.RSIStrategy;
 import Lumberj3ck.Runner;
@@ -11,6 +20,7 @@ import Lumberj3ck.Strategy;
 import Lumberj3ck.TestExecutor;
 import Lumberj3ck.TestStrategy;
 import Lumberj3ck.TradeExecutor;
+import Lumberj3ck.appenders.TextAreaAppender;
 import javafx.animation.Transition;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -76,13 +86,33 @@ public class HelloFX extends Application {
         TradeExecutor executor = executors.get(executorName);
 
         Runner runner = new Runner();
-        runner.run(strategy, executor);
+        Thread runnerThread = new Thread(() -> {
+            runner.run(strategy, executor);
+        });
+        runnerThread.setDaemon(true);
+        runnerThread.start();
 
-        // String message = String.format("Strategy %s executed in %d ms using %s.\n", strategyName, executionTime, executorName);
-
-        // outputArea.appendText(message);
-        // showTrayMessage("Execution Complete", message);
+        TextAreaAppender.setTextArea(outputArea);
+        addTextAreaAppender();
     }
+
+    private void addTextAreaAppender() {
+        LoggerContext context = (LoggerContext) LogManager.getContext(false);
+        Configuration config = context.getConfiguration();
+        
+        Appender appender = TextAreaAppender.createAppender();
+        appender.start();
+        config.addAppender(appender);
+        
+        for (LoggerConfig loggerConfig : config.getLoggers().values()) {
+            loggerConfig.addAppender(appender, null, null);
+        }
+        
+        config.getRootLogger().addAppender(appender, null, null);
+        
+        context.updateLoggers();
+    }
+
 
     private void loadStrategiesAndExecutors() {
         strategies.put("SmaStrategy", new SmaStrategy());

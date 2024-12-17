@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration>
+  <Appender name="TextAreaAppender" class="Lumberj3ck.appenders.TextAreaAppender">
+      <PatternLayout pattern="%d{HH:mm:ss} [%t] %-5level %logger{36} - %msg%n"/>
+  </Appender>
   <Appenders>
     <Console name="Console">
       <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
