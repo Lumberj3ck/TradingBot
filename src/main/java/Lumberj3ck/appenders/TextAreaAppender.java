@@ -31,7 +31,9 @@ public class TextAreaAppender extends AbstractAppender {
     }
 
     public static Appender createAppender() {
-        Layout<? extends Serializable> layout = PatternLayout.createDefaultLayout();
+        Layout<? extends Serializable> layout = PatternLayout.newBuilder()
+            .withPattern("%d{HH:mm:ss.SSS} [%t] %-5level %msg%n")
+            .build();
         return new TextAreaAppender("TextAreaAppender", null, layout);
     }
 }
