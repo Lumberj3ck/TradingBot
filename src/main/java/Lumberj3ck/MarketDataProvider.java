@@ -58,12 +58,26 @@ public class MarketDataProvider {
                 .get()
                 .build();
         try {
-            Response response = this.manager.client.newCall(request).execute();
-            String jsonData = response.body().string();
-            JSONObject Jobject = new JSONObject(jsonData);
+            String next_page_token; 
+            ArrayList<Double> closing_prices = new ArrayList<>();
+            do {
+                Response response = this.manager.client.newCall(request).execute();
+                String jsonData = response.body().string();
+                JSONObject Jobject = new JSONObject(jsonData);
+
+                next_page_token = Jobject.optString("next_page_token");
+                closing_prices.addAll(buildData(Jobject, symbol));
+
+                String newRequestUrl = requestUrl +  "&page_token=" + next_page_token;
+                request = request.newBuilder()
+                .url(newRequestUrl)
+                .build();
+            }
+            while (next_page_token.length() > 0); 
 
             logger.info("Retrieved closing prices for {} from {} aggregated by {}", symbol, start, timeframe);
-            return buildData(Jobject, symbol);
+
+            return closing_prices;
         } catch (Exception e) {
             logger.error(e);
         }
