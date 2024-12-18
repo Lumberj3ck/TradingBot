@@ -24,6 +24,8 @@ public class App {
         // -------------- Testing Runner with Strategies ----
         // TestStrategy s = new TestStrategy();
         // TestExecutor e = new TestExecutor();
+        SMARSIDailyStrategy s = new SMARSIDailyStrategy();
+        TestExecutor e = new TestExecutor();
         // Strategy s = new SmaStrategy();
         // // AlpacaPaperExecutor e = new AlpacaPaperExecutor();
         // s.shouldEnterMarket("AAPL");
