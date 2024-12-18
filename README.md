@@ -39,18 +39,19 @@ Strategies to implement:
 
 Under discussion:
 
-1. Discuss if we should decouple TradingExecutor from Abstract Strategy.  Because Strategy is supposed to be only responsible for entering market or exiting market, everything else is done by TradingExecutor
-2. Discuss if we should move strategies to specfical folder
+1. Discuss if we should decouple TradingExecutor from Abstract Strategy.  Because Strategy is supposed to be only responsible for entering market or exiting market, everything else is done by TradingExecutor ✅
+2. Discuss if we should move strategies to specfical folder ❌
 
 
 TODO:
 
-1. Move isPositionOpen from strategy to Executor
-2. Update hardcoded functionality  
-3. When strategy is initialised we can decide which tradingBroker should we use we can for example use test and may use papertrading implementation  
-4. Add logging  
-5. Add a bigger list of stocks  
-6. make alpaca api url more changeable  
-7. Add stops orders for buying
-8. Tweak hourly and daily strategies' parameters for more accurate result (google the actual strategies for reference)
+1. Move isPositionOpen from strategy to Executor ✅
+2. Update hardcoded functionality (amount) ✅
+3. When strategy is initialised we can decide which tradingBroker should we use we can for example use test and may use papertrading implementation ✅
+4. Add logging ✅
+5. Add a bigger list of stocks ✅
+6. make alpaca api url more changeable ❌ 
+7. Add stops orders for buying ✅
+8. Tweak hourly and daily strategies' parameters for more accurate result (google the actual strategies for reference) ❌
+9. add ability to buy more when the trend is still going up ❌
 
