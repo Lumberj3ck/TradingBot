@@ -13,7 +13,7 @@ public class AlpacaPaperExecutor extends TradeExecutor {
 
     private final String url;
     private AlpacaKeysManager manager;
-    private static final Logger logger = LogManager.getRootLogger(); 
+    private static final Logger logger = LogManager.getRootLogger();
 
     public AlpacaPaperExecutor() {
         this.manager = new AlpacaKeysManager();
@@ -21,15 +21,15 @@ public class AlpacaPaperExecutor extends TradeExecutor {
     }
 
     @Override
-    public boolean isPositionOpen(String symbol){
+    public boolean isPositionOpen(String symbol) {
         String request_url = String.format("https://paper-api.alpaca.markets/v2/positions/%s", symbol);
 
         logger.debug("Making request to {}", request_url);
 
         Request request = new Request.Builder()
-        .url(request_url)
-        .get()
-        .build();
+                .url(request_url)
+                .get()
+                .build();
 
         try {
             Response response = this.manager.client.newCall(request).execute();
@@ -37,7 +37,7 @@ public class AlpacaPaperExecutor extends TradeExecutor {
             JSONObject jo = new JSONObject(response_data);
             String asset_id = jo.optString("asset_id");
             logger.info("Asset with folowing id {} ", asset_id);
-            if (asset_id.length() > 0){
+            if (asset_id.length() > 0) {
                 return true;
             }
         } catch (Exception e) {
@@ -58,10 +58,11 @@ public class AlpacaPaperExecutor extends TradeExecutor {
     public void buy(String symbol, String amount) {
         JSONObject json = new JSONObject();
         json.put("side", "buy");
-        json.put("type", "market");
-        json.put("time_in_force", "gtc");
+        json.put("type", "trailing_stop");
         json.put("symbol", symbol);
         json.put("qty", amount);
+        json.put("time_in_force", "gtc");
+        json.put("trailing_percent", "3");
 
         Request request = new Request.Builder()
                 .url(url)
@@ -86,10 +87,11 @@ public class AlpacaPaperExecutor extends TradeExecutor {
     public void sell(String symbol, String amount) {
         JSONObject json = new JSONObject();
         json.put("side", "sell");
-        json.put("type", "market");
-        json.put("time_in_force", "gtc");
+        json.put("type", "trailing_stop");
         json.put("symbol", symbol);
         json.put("qty", amount);
+        json.put("time_in_force", "gtc");
+        json.put("trail_percent", "3");
 
         Request request = new Request.Builder()
                 .url(url)
