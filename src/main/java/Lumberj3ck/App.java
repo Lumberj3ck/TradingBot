@@ -20,7 +20,7 @@ public class App {
         // RelativeStrengthIndexIndicator.calculate(cp, 14);
 
         // -------------- Testing Runner with Strategies ----
-        TestStrategy s = new TestStrategy();
+        SMARSIDailyStrategy s = new SMARSIDailyStrategy();
         TestExecutor e = new TestExecutor();
         // Strategy s = new SmaStrategy();
         // // AlpacaPaperExecutor e = new AlpacaPaperExecutor();

@@ -16,7 +16,8 @@ import Lumberj3ck.DailySMAStrategy;
 import Lumberj3ck.HourlySMAStrategy;
 import Lumberj3ck.Strategy;
 import Lumberj3ck.TestExecutor;
-import Lumberj3ck.TestStrategy;
+import Lumberj3ck.SMARSIHourlyStrategy;
+import Lumberj3ck.SMARSIDailyStrategy;
 import Lumberj3ck.TradeExecutor;
 import Lumberj3ck.appenders.TextAreaAppender;
 import javafx.animation.Transition;
@@ -117,7 +118,8 @@ public class HelloFX extends Application {
         strategies.put("HourlySMAStrategy", new HourlySMAStrategy());
         strategies.put("DailyRSIStrategy", new DailyRSIStrategy());
         strategies.put("HourlyRSIStrategy", new HourlyRSIStrategy());
-        strategies.put("TestStrategy", new TestStrategy());
+        strategies.put("TestDailyStrategy", new SMARSIDailyStrategy());
+        strategies.put("TestHourlyStrategy", new SMARSIHourlyStrategy());
 
         executors.put("AlpacaPaperExecutor", new AlpacaPaperExecutor());
         executors.put("TestExecutor", new TestExecutor());
