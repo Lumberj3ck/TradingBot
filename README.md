@@ -15,7 +15,7 @@ Jar file require for you to have a .env file in the root file along with jar fil
            ├───.env
 ```
 
-.Env file is required for bot to access api. Since we don't want to store any secrets in the repository we will require you to go by [following link](www.google.com) and download the .env with test secret key and test account created. Place .env file into the same folder with jar file.
+.Env file is required for bot to access api. Since we don't want to store any secrets in the repository we will require you to go to our report file and over there find the .env file link, please download the .env with test secrets key. Place .env file into the same folder with jar file.
 
 Run jar file:
 ```bash
