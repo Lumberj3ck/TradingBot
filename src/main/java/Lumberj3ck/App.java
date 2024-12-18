@@ -15,11 +15,10 @@ public class App {
         // // provider.calculateSMA(cp);
         // provider.closeClient();
 
-
         // SimpleMovingAverageIndicator.calculate(cp, 10);
         // SimpleMovingAverageIndicator.calculate(cp, 50);
         // RelativeStrengthIndexIndicator.calculate(cp, 14);
-        
+
         // -------------- Testing Runner with Strategies ----
         TestStrategy s = new TestStrategy();
         TestExecutor e = new TestExecutor();

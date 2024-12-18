@@ -5,10 +5,10 @@ import java.util.ArrayList;
 
 import Lumberj3ck.indicators.SimpleMovingAverageIndicator;
 
-public class SmaStrategy extends Strategy {
+public class DailySMAStrategy extends Strategy {
     private MarketDataProvider market_data_provider;
 
-    public SmaStrategy() {
+    public DailySMAStrategy() {
         this.market_data_provider = new MarketDataProvider();
     }
 
@@ -28,5 +28,4 @@ public class SmaStrategy extends Strategy {
     public boolean shouldExitMarket(String symbol) {
         return !shouldEnterMarket(symbol);
     }
-
 }

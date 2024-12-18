@@ -5,18 +5,20 @@ import java.util.ArrayList;
 
 import Lumberj3ck.indicators.RelativeStrengthIndexIndicator;
 
-public class RSIStrategy extends Strategy {
+public class HourlyRSIStrategy extends Strategy {
     private MarketDataProvider mdp;
 
-    public RSIStrategy() {
+    public HourlyRSIStrategy() {
         this.mdp = new MarketDataProvider();
     }
 
     @Override
     public boolean shouldEnterMarket(String symbol) {
         LocalDate startRSI200 = mdp.getStartingDateForDays(200);
-        ArrayList<Double> bars = mdp.getClosingPrices(symbol, startRSI200, "1D");
+        ArrayList<Double> bars = mdp.getClosingPrices(symbol, startRSI200, "1H");
         Double rsi = RelativeStrengthIndexIndicator.calculate(bars);
+
+        System.out.println(rsi);
 
         return rsi > 30 && rsi < 50;
     }
