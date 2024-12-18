@@ -1,17 +1,22 @@
 package Lumberj3ck;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+
+import Lumberj3ck.indicators.SimpleMovingAverageIndicator;
+
 public class App {
     public static void main(String[] args) {
         // --------- Testing Market Data Provider
-        // MarketDataProvider provider = new MarketDataProvider();
+        MarketDataProvider provider = new MarketDataProvider();
         // provider.getDataFromMarket("AAPL");
         // provider.getAssetsList();
 
         // ArrayList<String> s = provider.getAssetsList();
         // provider.getStartingDateForDays(200);
         // provider.getDataFromMarket("AAPL");
-        // LocalDate startingDate = LocalDate.of(2024, 3, 5);
-        // ArrayList<Double> cp = provider.getClosingPrices("AAPL", startingDate, "1H");
+        LocalDate startingDate = LocalDate.of(2024, 3, 5);
+        ArrayList<Double> cp = provider.getClosingPrices("AAPL", startingDate, "1H");
         // System.out.print(cp.size());
         // System.out.print(cp);
         // // provider.calculateSMA(cp);
@@ -24,12 +29,14 @@ public class App {
         // -------------- Testing Runner with Strategies ----
         // TestStrategy s = new TestStrategy();
         // TestExecutor e = new TestExecutor();
-        SMARSIDailyStrategy s = new SMARSIDailyStrategy();
-        TestExecutor e = new TestExecutor();
+        // SMARSIDailyStrategy s = new SMARSIDailyStrategy();
+        // TestExecutor e = new TestExecutor();
         // Strategy s = new SmaStrategy();
         // // AlpacaPaperExecutor e = new AlpacaPaperExecutor();
         // s.shouldEnterMarket("AAPL");
         // Runner r = new Runner();
         // r.run(s, e);
+
+        SimpleMovingAverageIndicator.calculate(cp, 10);
     }
 }

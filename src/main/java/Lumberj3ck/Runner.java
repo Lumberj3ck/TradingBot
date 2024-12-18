@@ -12,7 +12,7 @@ public class Runner {
     public MarketDataProvider mp;
     private static final Logger logger = LogManager.getRootLogger();
 
-    public Runner(){
+    public Runner() {
         this.mp = new MarketDataProvider();
         logger.debug("Initialized Runner with new MarketDataProvider");
     }
@@ -32,7 +32,8 @@ public class Runner {
                 logger.info("Exiting market for symbol: {}", symbol);
                 executor.sell(symbol, amount);
             } else {
-                logger.debug("No action needed for symbol: {}. Position already open at {}", symbol, LocalDateTime.now());
+                logger.debug("No action needed for symbol: {}. Position already open at {}", symbol,
+                        LocalDateTime.now());
             }
         }
     }
@@ -56,8 +57,8 @@ public class Runner {
                 logger.debug("Starting stock check cycle");
                 stockCheckCycle(strategy, executor);
             } else {
-                logger.info("Market will be open in {} days {} hours and {} minutes", 
-                    duration.toDaysPart(), hours, minutes);
+                logger.info("Market will be open in {} days {} hours and {} minutes",
+                        duration.toDaysPart(), hours, minutes);
                 sleep_time = duration.toMillis();
             }
 

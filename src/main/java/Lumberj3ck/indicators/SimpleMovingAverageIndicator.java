@@ -19,7 +19,7 @@ public class SimpleMovingAverageIndicator {
         }
 
         Double sma = priceSum / prices.size();
-        logger.info("Calculated SMA: {}", sma);
+        logger.info("Calculated SMA: {}, for index: {}", sma, index);
         return sma;
     }
 
