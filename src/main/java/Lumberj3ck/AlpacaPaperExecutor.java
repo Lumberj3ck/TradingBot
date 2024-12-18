@@ -58,11 +58,10 @@ public class AlpacaPaperExecutor extends TradeExecutor {
     public void buy(String symbol, String amount) {
         JSONObject json = new JSONObject();
         json.put("side", "buy");
-        json.put("type", "trailing_stop");
+        json.put("type", "market");
         json.put("symbol", symbol);
         json.put("qty", amount);
         json.put("time_in_force", "gtc");
-        json.put("trailing_percent", "3");
 
         Request request = new Request.Builder()
                 .url(url)
