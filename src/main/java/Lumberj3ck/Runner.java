@@ -2,6 +2,7 @@ package Lumberj3ck;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -18,7 +19,7 @@ public class Runner {
     }
 
     private void stockCheckCycle(Strategy strategy, TradeExecutor executor) {
-        List<String> symbols = this.mp.getAssetsList().subList(0, 50);
+        List<String> symbols = this.mp.getAssetsList().subList(15, 20);
         logger.info("Starting stock check cycle for {} symbols", symbols.size());
 
         for (String symbol : symbols) {
@@ -28,10 +29,17 @@ public class Runner {
             if (!executor.isPositionOpen(symbol) && strategy.shouldEnterMarket(symbol)) {
                 logger.info("Entering market for symbol: {}", symbol);
                 executor.buy(symbol, amount);
-            } else if (executor.isPositionOpen(symbol) && strategy.shouldExitMarket(symbol)) {
-                logger.info("Exiting market for symbol: {}", symbol);
+
+                while (!executor.isPositionOpen(symbol)) {
+                    logger.info("Waiting for position to open...");
+                }
                 executor.sell(symbol, amount);
-            } else {
+                logger.info("Opening trailing stop order");
+
+                // } else if (executor.isPositionOpen(symbol)) {
+                // logger.info("Exiting market for symbol: {}", symbol);
+                // executor.sell(symbol, amount);
+                // } else {
                 logger.debug("No action needed for symbol: {}. Position already open at {}", symbol,
                         LocalDateTime.now());
             }
