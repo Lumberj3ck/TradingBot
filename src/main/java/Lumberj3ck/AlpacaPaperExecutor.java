@@ -36,7 +36,7 @@ public class AlpacaPaperExecutor extends TradeExecutor {
             String response_data = response.body().string();
             JSONObject jo = new JSONObject(response_data);
             String asset_id = jo.optString("asset_id");
-            logger.info("Asset with folowing id {} ", asset_id);
+            logger.info("Asset with folowing id {} is already bought", asset_id);
             if (asset_id.length() > 0) {
                 return true;
             }
@@ -86,11 +86,11 @@ public class AlpacaPaperExecutor extends TradeExecutor {
     public void sell(String symbol, String amount) {
         JSONObject json = new JSONObject();
         json.put("side", "sell");
-        json.put("type", "trailing_stop");
         json.put("symbol", symbol);
         json.put("qty", amount);
         json.put("time_in_force", "gtc");
-        json.put("trail_percent", "3");
+        json.put("type", "trailing_stop");
+        json.put("trail_percent", "2");
 
         Request request = new Request.Builder()
                 .url(url)
