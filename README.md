@@ -15,7 +15,7 @@ Jar file require for you to have a .env file in the root file along with jar fil
            ├───.env
 ```
 
-.env file is required for the trading bot to access the API. Since storing API keys in the public repository would be impractical, you would need to follow the link and download the .env file with the test account and API keys. You need to place the .env file into the same folder as the .jar file.
+.env file is required for the trading bot to access the API. Since storing API keys in the public repository would be impractical, you would need to follow the link provided in our project report and download the .env file with the test account and API keys. You need to place the .env file into the same folder as the jar file.
 
 Run jar file:
 ```bash
