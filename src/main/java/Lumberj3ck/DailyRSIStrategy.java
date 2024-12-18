@@ -18,7 +18,6 @@ public class DailyRSIStrategy extends Strategy {
         ArrayList<Double> bars = mdp.getClosingPrices(symbol, startRSI200, "1D");
         Double rsi = RelativeStrengthIndexIndicator.calculate(bars);
 
-        System.out.println(rsi);
 
         return rsi > 30 && rsi < 50;
     }
