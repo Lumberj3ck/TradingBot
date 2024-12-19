@@ -11,7 +11,8 @@ Jar file require for you to have a .env file in the root file along with jar fil
 
 ```bash
    └───tradingApp  
-           ├───TradingBot.jar  
+           ├───TradingBot.jar
+           ├───TradingBotGUI.jar  
            ├───.env
 ```
 
